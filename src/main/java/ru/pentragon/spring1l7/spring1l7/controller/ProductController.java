@@ -34,6 +34,7 @@ public class ProductController {
         productService.deleteProduct(id);
     }
 
+    //http://localhost:8189/app/products/parse/min?cost=100
     @GetMapping("/parse/min")
     public List<Product> findProductsByCostGreaterThan(@RequestParam String cost){
         System.out.println("COST = "+cost);
