@@ -1,8 +1,9 @@
 package ru.pentragon.spring1l7.spring1l7.repository;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
 import ru.pentragon.spring1l7.spring1l7.model.Product;
 
 import java.util.List;
