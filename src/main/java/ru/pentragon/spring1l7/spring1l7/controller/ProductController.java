@@ -37,7 +37,7 @@ public class ProductController {
                 size);
     }
 
-    // http://localhost:8189/happy/api/v1/products
+    // http://localhost:8189/app/api/v1/products/1
     @GetMapping("/{id}")
     public ProductDto findProductById(@PathVariable Long id) {
         return productService.findProductById(id).orElseThrow(() -> new ResourceNotFoundException("Product with id: " + id + " doesn't exist"));
@@ -45,14 +45,15 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Product saveNewProduct(@RequestBody Product product) {
+    public ProductDto saveNewProduct(@RequestBody ProductDto product) {
+        //System.out.println(product.toString());
         product.setId(null);
-        return productService.saveOrUpdate(product);
+        return productService.saveOrUpdate(product).orElseThrow(() -> new ResourceNotFoundException("Product not created"));
     }
 
     @PutMapping
-    public Product updateProduct(@RequestBody Product product) {
-        return productService.saveOrUpdate(product);
+    public ProductDto updateProduct(@RequestBody ProductDto product) {
+        return productService.saveOrUpdate(product).orElseThrow(() -> new ResourceNotFoundException("Product not updated"));
     }
 
     @DeleteMapping("/{id}")

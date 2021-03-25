@@ -28,8 +28,16 @@ public class ProductService {
         return productRepository.findAll(spec, PageRequest.of(page - 1, pageSize)).map(ProductDto::new);
     }
 
-    public Product saveOrUpdate(Product product) {
-        return productRepository.save(product);
+    public Optional<ProductDto> saveOrUpdate(ProductDto product) {
+//        System.out.println(product.toString());
+        Product tmp = new Product();
+        tmp.setId(product.getId());
+        tmp.setTitle(product.getTitle());
+        tmp.setCost(product.getPrice());
+//        System.out.println("product cost = "+product.getPrice());
+//        System.out.println("TMP cost = "+tmp.getCost());
+        tmp = productRepository.saveAndFlush(tmp);
+        return findProductById(tmp.getId());
     }
 
     public void deleteById(Long id) {
